@@ -1,76 +1,5 @@
 <?php
 
-// Database connection
-// $host = 'localhost'; // Database host
-// $db = 'your_database'; // Database name
-// $user = 'your_username'; // Database username
-// $pass = 'your_password'; // Database password
-
-// try {
-//     $pdo = new PDO("mysql:host=$host;dbname=$db", $user, $pass);
-//     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-// } catch (PDOException $e) {
-//     die("Database connection failed: " . $e->getMessage());
-// }
-
-// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-//     // Form data processing
-//     $form_data = [
-//         'first_name' => htmlspecialchars($_POST['first_name']),
-//         'last_name' => htmlspecialchars($_POST['last_name']),
-//         'caller_id' => htmlspecialchars($_POST['caller_id']),
-//         'email' => filter_var($_POST['email'], FILTER_SANITIZE_EMAIL),
-//         'dob' => htmlspecialchars($_POST['dob']),
-//         'state' => htmlspecialchars($_POST['state']),
-//         'city' => htmlspecialchars($_POST['city']),
-//         'zip' => htmlspecialchars($_POST['zip']),
-//         'xxTrustedFormToken' => htmlspecialchars($_POST['xxTrustedFormToken']),
-//         'TrustedFormPingUrl' => htmlspecialchars($_POST['TrustedFormPingUrl']),
-//         'jornaya_leadid' => htmlspecialchars($_POST['jornaya_leadid']),
-//         'ip_address' => htmlspecialchars($_POST['ip_address']),
-//         'traffic_source_id' => htmlspecialchars($_POST['traffic_source_id']),
-//         'ip_region' => htmlspecialchars($_POST['ip_region']),
-//         'ip_city' => htmlspecialchars($_POST['ip_city']),
-//         'ip_country' => htmlspecialchars($_POST['ip_country']),
-//     ];
-
-//     // Insert data into the database
-//     try {
-//         $sql = "INSERT INTO custom_form_submissions 
-//                 (first_name, last_name, caller_id, email, dob, state, city, zip, xxTrustedFormToken, TrustedFormPingUrl, jornaya_leadid, ip_address, traffic_source_id, ip_region, ip_city, ip_country, time) 
-//                 VALUES 
-//                 (:first_name, :last_name, :caller_id, :email, :dob, :state, :city, :zip, :xxTrustedFormToken, :TrustedFormPingUrl, :jornaya_leadid, :ip_address, :traffic_source_id, :ip_region, :ip_city, :ip_country, NOW())";
-
-//         $stmt = $pdo->prepare($sql);
-//         $stmt->execute($form_data);
-//     } catch (PDOException $e) {
-//         error_log('Database insert failed: ' . $e->getMessage());
-//         die('Database insert failed');
-//     }
-
-//     // Send data to Google Sheets
-//     $url = 'https://script.google.com/macros/s/AKfycbxF-qYrIAEFGIPfoCfLPYU9p8_9-5CPlarkTogsd3JeWbdpdqKHsuEQYy8Y8oQkyMMD/exec';
-//     $postData = http_build_query($form_data);
-//     $options = [
-//         'http' => [
-//             'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
-//             'method'  => 'POST',
-//             'content' => $postData,
-//         ],
-//     ];
-//     $context = stream_context_create($options);
-//     $result = file_get_contents($url, false, $context);
-
-//     // Error handling for Google Sheets submission
-//     if ($result === FALSE) {
-//         error_log('Failed to submit data to Google Sheets');
-//     }
-
-//     // Redirect to a thank-you page or provide a response
-//     header("Location: /thank-you.html");
-//     exit();
-// }
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Process form data and sanitize inputs
     $form_data = [
@@ -123,17 +52,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <title>My Disability Assist - Get a Quote</title>
-    <link rel="icon" href="https://mydisabilityassist.com/wp-content/uploads/2024/08/cropped-Group-48-32x32.webp" sizes="32x32" />
-    <link rel="icon" href="https://mydisabilityassist.com/wp-content/uploads/2024/08/cropped-Group-48-192x192.webp" sizes="192x192" />
-    <link rel="apple-touch-icon" href="https://mydisabilityassist.com/wp-content/uploads/2024/08/cropped-Group-48-180x180.webp" />
+    <title>Secure Last Expense - Get a Quote</title>
+    <link rel="icon" href="https://securelastexpense.com/wp-content/uploads/2024/10/Group-3693-150x150.png" sizes="32x32" />
+    <link rel="icon" href="https://securelastexpense.com/wp-content/uploads/2024/10/Group-3693-300x300.png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="https://securelastexpense.com/wp-content/uploads/2024/10/Group-3693-300x300.png" />
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #173c1d;
+            background-color: #FFFF311A;
             margin: 0;
             display: flex;
             align-items: center;
@@ -160,6 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             display: flex;
             flex-direction: column;
             align-items: center;
+            box-shadow: 0 7px 35px 0 #0000000d;
         }
 
         label {
@@ -183,22 +113,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 			font-family: 'Poppins';
 			font-size: 16px;
         }
-		
-/* 		select {
-            width: 100%;
-            padding: 15px;
-            margin-bottom: 16px;
-            box-sizing: border-box;
-            border: 1px solid #69727d6e;
-            border-radius: 5px;
-            background: transparent;
-			color: #000;
-			font-family: 'Poppins';
-			font-size: 16px;
-        } */
 
         button {
-            background-color: #fdbe61;
+            background-color: #FFFF31;
             color: #000;
             padding: 15px 70px;
             border: none;
@@ -212,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         button:hover {
-            background-color: #173c1d;
+            background-color: #000;
 			color: #fff;
 			transition: .3s;
         }
@@ -239,7 +156,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             font-size: 40px;
             font-weight: 700;
             text-align: center;
-            color: #fff;
+            color: #000;
         }
         .top3 {
             font-family: 'Poppins';
@@ -274,7 +191,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             color: #000;
             margin: 0px 0px -44px 0px;
             padding: 10px 40px 8px 40px;
-            background-color: #fdbe61;
+            background-color: #FFFF31;
             border-radius: 0px 0px 30px 30px;
             z-index: 1;
         }
@@ -313,10 +230,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 				padding: 12px;
 				margin-bottom: 0px;
 			}
-/* 			select {
-				padding: 12px;
-				margin-bottom: 0px;
-			} */
 			.tcp p {
 				margin: 0;
 			}
@@ -351,15 +264,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             flex-wrap: nowrap;
             margin: 0px 0px 40px 0px;
             padding: 20px 30px 20px 30px;
-            background-color: #fdbe61;
+            background-color: #000;
             border-radius: 30px 30px 30px 30px;
             box-shadow: 0px 25px 40px 0px rgba(0, 0, 0, 0.25);
-            width: 70%;" >
-                <source type="image/webp" srcset="https://mydisabilityassist.com/wp-content/uploads/2024/08/Group-40.webp">
-                <img src="https://mydisabilityassist.com/wp-content/uploads/2024/08/Group-40.webp" alt="White House "style="width: 100%"/>
+            width: 13%;" >
+                <source type="image/webp" srcset="https://securelastexpense.com/wp-content/uploads/2024/10/Group-3656-1.png">
+                <img src="https://securelastexpense.com/wp-content/uploads/2024/10/Group-3656-1.png" alt="White House "style="width: 100%"/>
             </picture>
         </div>
-        <span class="top2">Secure Your Disability Benefits Plans</span>
+        <span class="top2">Please Enter The Details Below</span>
         
 
         <form id="leadForm" action='' method='post'>
@@ -374,25 +287,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				<input type='hidden' id="ip-city" value='' name='ip_city'>
 				<input type='hidden' id="ip-country" value='' name='ip_country'>
 				<input type='hidden' id='timestamp' name='original_lead_submit_date' value=''>
-<!-- 				<input type='hidden' id='age' name='age' value=''> -->
-<!-- 				<input type='hidden' value='yes' name='receiving_benefits'>
-				<input type='hidden' value='yes' name='out_of_work'>
-				<input type='hidden' value='no' name='worked_five_years'>
-				<input type='hidden' value='yes' name='seen_doctor'>
-				<input type='hidden' value='no' name='has_lawyer'> -->
-<!-- 				<input type='hidden' id="worked" value='no' name='worked'> 
-				<input type='hidden' id="seeking" value='no' name='seeking'>  -->
-				
-<!-- 				<div class="TFS">
-					<label for="tfs">Select Traffic Source ID: <span style="color: red;">*</span></label>
-					<select id="tfs" name="traffic_source_id" placeholder="Slect Traffic Source ID">
-						<option value="1019">1019</option>
-						<option value="1000">1000</option>
-						<option value="1051">1051</option>
-						<option value="1052">1052</option>
-						<option value="1009">1009</option>
-					</select>
-				</div> -->
 
                 <div class="FNAME">
 					<label for="firstName">First Name: <span style="color: red;">*</span></label>
@@ -436,7 +330,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 
                 
                 <input id="trusted_form_cert_url" name="trusted_form_cert_url" type="hidden" value=""/>
-                <!-------<input id="jornaya_leadid" name="jornaya_leadid" type="hidden" value=""/>-->
                 <input id="leadid_token" name="jornaya_leadid" type="hidden" value=""/>
 
                 <div class="tcp">
@@ -488,16 +381,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		
 		$("input[name='source_url']").val(window.location.href);
 		
-// 		const params = new URLSearchParams(window.location.search);
-
-// 		// Get specific parameters and set them to hidden fields
-// 		const param1 = params.get('worked');
-// 		const param2 = params.get('seeking');
-
-// 		// Populate hidden fields if the parameters exist
-// 		if (param1) $('#worked').val(param1);
-// 		if (param2) $('#seeking').val(param2);
-		
 		const now = new Date();
 		const formattedTimestamp = now.getFullYear() + '-' +
 			('0' + (now.getMonth() + 1)).slice(-2) + '-' +
@@ -511,24 +394,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             var dobValue = $(this).val();
             var formattedDob = dobValue.replace(/\D/g, '').replace(/(\d{2})(\d{2})?(\d{0,4})?/, '$1-$2-$3').replace(/--/, '-');
             $(this).val(formattedDob);
-			
-// 			var dobParts = formattedDob.split("-");
-//             if (dobParts.length === 3) {
-//                 var yyyy = dobParts[2];
-//                 var mm = dobParts[0];
-//                 var dd = dobParts[1];
-//                 const dob = new Date(`${yyyy}-${mm}-${dd}`);
-				
-// 				const age = calculateAge(dob);
-// 				$("#age").val(age);
-//             }
         });
-		
-// 		function calculateAge(dob) {
-// 			const diff = Date.now() - dob.getTime();
-// 			const ageDate = new Date(diff);
-// 			return Math.abs(ageDate.getUTCFullYear() - 1970);
-// 		}
 
         $("#submitButton").on("click", function() {
             var dobValue = $("#dob").val();
@@ -612,13 +478,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         this.value = this.value.trim();
     });
 </script>
-
-<!-- <script>
-    // Disable right-click context menu
-    window.addEventListener('contextmenu', function (e) {
-        e.preventDefault();
-    });
-</script> -->
 
 </body>
 </html>
