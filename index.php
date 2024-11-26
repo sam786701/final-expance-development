@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Redirect to a thank-you page or provide a response
-    header("Location: /thank-you.html");
+    header("Location: /");
     exit();
 }
 ?>
