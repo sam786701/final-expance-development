@@ -279,7 +279,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <h1>Get Consultation Now!</h1>
             <div class="form-content">
 				<input type='hidden' name='action' value='custom_form_submission'>
-                <input type='hidden' value='313e1b73089f468a88166e3c5b931639' name='lead_token'>
+                <input type='hidden' value='' name='lead_token'>
                 <input type='hidden' value='' name='traffic_source_id'>
 				<input type='hidden' value='' name='source_url'>
 				<input type='hidden' id="ip-address" value='' name='ip_address'>
@@ -414,44 +414,42 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-------Trim_Space---------------->
 <script>
-    function submitForm() {
-        let valid = true;
-        let check = $("input");
-        for(i=0; i<check.length; i++) {
-            if($(check[i]).val().length == 0){
-                valid = false;
-                break;
-            }
-        }
+    // function submitForm() {
+    //     let valid = true;
+    //     let check = $("input");
+    //     for(i=0; i<check.length; i++) {
+    //         if($(check[i]).val().length == 0){
+    //             valid = false;
+    //             break;
+    //         }
+    //     }
         
-        if(!valid){
-            alert('Enter all field ');
-            return;
-        }
+    //     if(!valid){
+    //         alert('Enter all field ');
+    //         return;
+    //     }
         
-        var data = $("form").serializeArray();
+    //     var data = $("form").serializeArray();
 		
-		const fieldsToExclude = ['ip_region', 'ip_city', 'ip_country']; // Add other fields you want to exclude
-		data = data.filter(function(field) {
-			return !fieldsToExclude.includes(field.name);
-		});
+	// 	const fieldsToExclude = ['ip_region', 'ip_city', 'ip_country']; // Add other fields you want to exclude
+	// 	data = data.filter(function(field) {
+	// 		return !fieldsToExclude.includes(field.name);
+	// 	});
 		
-		var serializedData = $.param(data);
+	// 	var serializedData = $.param(data);
         
-        $.post('https://evolvetech-innovations.trackdrive.com/api/v1/leads', data, function(rsp){
-            if(rsp.status = 200){
-                alert('Saved');
-                window.location.reload(true);
-            }
-            else{
-                alert(JSON.stringify(rsp))
-            }
-        }).fail(function(response) {
-            alert('Error: ' + response.responseText);
-        });
-            
-             
-        }
+    //     $.post('https://evolvetech-innovations.trackdrive.com/api/v1/leads', data, function(rsp){
+    //         if(rsp.status = 200){
+    //             alert('Saved');
+    //             window.location.reload(true);
+    //         }
+    //         else{
+    //             alert(JSON.stringify(rsp))
+    //         }
+    //     }).fail(function(response) {
+    //         alert('Error: ' + response.responseText);
+    //     });    
+    // }
 
     // Add event listeners to trim spaces from input fields
     document.getElementById("firstName").addEventListener("input", function() {
