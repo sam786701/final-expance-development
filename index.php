@@ -279,14 +279,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <h1>Get Consultation Now!</h1>
             <div class="form-content">
 				<input type='hidden' name='action' value='custom_form_submission'>
-                <input type='hidden' value='' name='lead_token'>
-                <input type='hidden' value='9999' name='traffic_source_id'>
+                <input type='hidden' value='841cac55ba0f4312bf3f8a39f85edd69' name='lead_token'>
+                <input type='hidden' value='10201' name='traffic_source_id'>
 				<input type='hidden' value='' name='source_url'>
 				<input type='hidden' id="ip-address" value='' name='ip_address'>
 				<input type='hidden' id="ip-region" value='' name='ip_region'>
 				<input type='hidden' id="ip-city" value='' name='ip_city'>
 				<input type='hidden' id="ip-country" value='' name='ip_country'>
-				<input type='hidden' id='timestamp' name='original_lead_submit_date' value=''>
+				<input type='hidden' id='timestamp' name='optin_timestamp' value=''>
 
                 <div class="FNAME">
 					<label for="firstName">First Name: <span style="color: red;">*</span></label>
@@ -414,42 +414,42 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-------Trim_Space---------------->
 <script>
-    // function submitForm() {
-    //     let valid = true;
-    //     let check = $("input");
-    //     for(i=0; i<check.length; i++) {
-    //         if($(check[i]).val().length == 0){
-    //             valid = false;
-    //             break;
-    //         }
-    //     }
+    function submitForm() {
+        let valid = true;
+        let check = $("input");
+        for(i=0; i<check.length; i++) {
+            if($(check[i]).val().length == 0){
+                valid = false;
+                break;
+            }
+        }
         
-    //     if(!valid){
-    //         alert('Enter all field ');
-    //         return;
-    //     }
+        if(!valid){
+            alert('Enter all field ');
+            return;
+        }
         
-    //     var data = $("form").serializeArray();
+        var data = $("form").serializeArray();
 		
-	// 	const fieldsToExclude = ['ip_region', 'ip_city', 'ip_country']; // Add other fields you want to exclude
-	// 	data = data.filter(function(field) {
-	// 		return !fieldsToExclude.includes(field.name);
-	// 	});
+		const fieldsToExclude = ['ip_region', 'ip_city', 'ip_country']; // Add other fields you want to exclude
+		data = data.filter(function(field) {
+			return !fieldsToExclude.includes(field.name);
+		});
 		
-	// 	var serializedData = $.param(data);
+		var serializedData = $.param(data);
         
-    //     $.post('https://evolvetech-innovations.trackdrive.com/api/v1/leads', data, function(rsp){
-    //         if(rsp.status = 200){
-    //             alert('Saved');
-    //             window.location.reload(true);
-    //         }
-    //         else{
-    //             alert(JSON.stringify(rsp))
-    //         }
-    //     }).fail(function(response) {
-    //         alert('Error: ' + response.responseText);
-    //     });    
-    // }
+        $.post('https://advance-grow-marketing.trackdrive.com/api/v1/leads', data, function(rsp){
+            if(rsp.status = 200){
+                alert('Saved');
+                window.location.reload(true);
+            }
+            else{
+                alert(JSON.stringify(rsp))
+            }
+        }).fail(function(response) {
+            alert('Error: ' + response.responseText);
+        });    
+    }
 
     // Add event listeners to trim spaces from input fields
     document.getElementById("firstName").addEventListener("input", function() {
