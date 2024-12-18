@@ -439,12 +439,56 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		var serializedData = $.param(data);
         
         $.post('https://advance-grow-marketing.trackdrive.com/api/v1/leads', data, function(rsp){
-            if(rsp.status = 200){
-                alert('Saved');
+            if (rsp.status = 200) {
+                let postDataToSheets = data;
+                postDataToSheets.push({ name: "api_response", value: JSON.stringify(rsp) });
+
+                $.post('https://script.google.com/macros/s/AKfycbxF-qYrIAEFGIPfoCfLPYU9p8_9-5CPlarkTogsd3JeWbdpdqKHsuEQYy8Y8oQkyMMD/exec', postDataToSheets, function(rsp) {
+                    if (rsp.result === "success") {
+                        alert('Form and API response posted successfully');
+                        window.location.href = '/thank-you.html';
+                    } else {
+                        alert('Error submitting to Google Sheets');
+                    }
+                }).fail(function(sheetError) {
+                    alert('Error: Unable to post to Google Sheets. ' + sheetError.responseText);
+                });
+                alert('Existing Lead Modified', JSON.stringify(rsp));
                 window.location.reload(true);
-            }
-            else{
-                alert(JSON.stringify(rsp))
+            } else if (rsp.status = 422) {
+                let postDataToSheets = data;
+                postDataToSheets.push({ name: "api_response", value: JSON.stringify(rsp) });
+
+                $.post('https://script.google.com/macros/s/AKfycbxF-qYrIAEFGIPfoCfLPYU9p8_9-5CPlarkTogsd3JeWbdpdqKHsuEQYy8Y8oQkyMMD/exec', postDataToSheets, function(rsp) {
+                    if (rsp.result === "success") {
+                        alert('Form and API response posted successfully');
+                        window.location.href = '/thank-you.html';
+                    } else {
+                        alert('Error submitting to Google Sheets');
+                    }
+                }).fail(function(sheetError) {
+                    alert('Error: Unable to post to Google Sheets. ' + sheetError.responseText);
+                });
+                alert('DNC Error', JSON.stringify(rsp));
+                window.location.reload(true);
+            } else if (rsp.status = 201) {
+                let postDataToSheets = data;
+                postDataToSheets.push({ name: "api_response", value: JSON.stringify(rsp) });
+
+                $.post('https://script.google.com/macros/s/AKfycbxF-qYrIAEFGIPfoCfLPYU9p8_9-5CPlarkTogsd3JeWbdpdqKHsuEQYy8Y8oQkyMMD/exec', postDataToSheets, function(rsp) {
+                    if (rsp.result === "success") {
+                        alert('Form and API response posted successfully');
+                        window.location.href = '/thank-you.html';
+                    } else {
+                        alert('Error submitting to Google Sheets');
+                    }
+                }).fail(function(sheetError) {
+                    alert('Error: Unable to post to Google Sheets. ' + sheetError.responseText);
+                });
+                alert('New Lead Posted', JSON.stringify(rsp));
+                window.location.reload(true);
+            } else {
+                alert(JSON.stringify(rsp));
             }
         }).fail(function(response) {
             alert('Error: ' + response.responseText);
