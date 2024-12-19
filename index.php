@@ -564,5 +564,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     });
 </script>
 
+<script>
+    // Disable right-click context menu
+    window.addEventListener('contextmenu', function (e) {
+        e.preventDefault();
+    });
+</script>
+
 </body>
 </html>
