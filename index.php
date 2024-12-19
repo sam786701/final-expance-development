@@ -338,7 +338,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 					<p>By clicking “Submit”, I consent to the <a href="https://securelastexpense.com/terms-and-condition/" traget="_black">Terms and Conditions</a> and <a href="https://securelastexpense.com/privacy-policy/" traget="_black">Privacy Policy</a>. and authorize an insurance representative from Securelastexpense to contact me directly about life insurance and related offers. Contact may include phone calls, emails, and texts using automated technology, even if my number is on a “Do Not Call” list. I understand that my consent is not required for purchase and that standard message and data rates may apply.</p>
                 </div>
                 
-                <button type="button" id="submitButton" class="submission-2">Submit</button>
+                <button type="button" id="submitButton" class="fe-insurance">Submit</button>
             </div>
         </form>
     </div>
