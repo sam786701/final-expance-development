@@ -270,7 +270,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             box-shadow: 0px 25px 40px 0px rgba(0, 0, 0, 0.25);
             width: 13%;" >
                 <source type="image/webp" srcset="https://securelastexpense.com/wp-content/uploads/2024/10/Group-3656-1.png">
-                <img src="https://securelastexpense.com/wp-content/uploads/2024/10/Group-3656-1.png" alt="White House "style="width: 100%"/>
+                <img src="https://securelastexpense.com/wp-content/uploads/2024/10/Group-3656-1.png" alt="Logo" style="width: 100%"/>
             </picture>
         </div>
         <span class="top2">Please Enter The Details Below</span>
