@@ -19,6 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'ip_region' => htmlspecialchars($_POST['ip_region']),
         'ip_city' => htmlspecialchars($_POST['ip_city']),
         'ip_country' => htmlspecialchars($_POST['ip_country']),
+        'api_response' => ($_POST['trackdrive_response']),
     ];
 
     // Send data to Google Sheets
@@ -287,6 +288,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				<input type='hidden' id="ip-city" value='' name='ip_city'>
 				<input type='hidden' id="ip-country" value='' name='ip_country'>
 				<input type='hidden' id='timestamp' name='optin_timestamp' value=''>
+                <input type="hidden" id="trackdriveResponse" name="trackdrive_response" value="">
 
                 <div class="FNAME">
 					<label for="firstName">First Name: <span style="color: red;">*</span></label>
@@ -336,7 +338,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 					<p>By clicking “Submit”, I consent to the <a href="https://securelastexpense.com/terms-and-condition/" traget="_black">Terms and Conditions</a> and <a href="https://securelastexpense.com/privacy-policy/" traget="_black">Privacy Policy</a>. and authorize an insurance representative from Securelastexpense to contact me directly about life insurance and related offers. Contact may include phone calls, emails, and texts using automated technology, even if my number is on a “Do Not Call” list. I understand that my consent is not required for purchase and that standard message and data rates may apply.</p>
                 </div>
                 
-                <button type="button" id="submitButton" class="submission-2" onclick="submitForm()">Submit</button>
+                <button type="button" id="submitButton" class="submission-2">Submit</button>
             </div>
         </form>
     </div>
@@ -406,94 +408,135 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 var formattedDob = yyyy + "-" + mm + "-" + dd;
                 $("#dob").val(formattedDob);
             }
+            
+            let valid = true;
+            
+            // Validate only visible and non-hidden fields
+            $('#leadForm input').filter(":visible").each(function () {
+                if ($(this).val().trim() === '') {
+                    valid = false;
+                    return false; // Exit each loop if a field is invalid
+                }
+            });
+
+            if (!valid) {
+                alert('Please fill out all required fields.');
+                return;
+            }
+
+            // Serialize form data
+            let formData = $('#leadForm').serializeArray();
+            const excludeFields = ['trackdrive_response', 'ip_region', 'ip_city', 'ip_country'];
+            formData = formData.filter(field => !excludeFields.includes(field.name));
+
+                // Send data to TrackDrive API
+            $.post('https://evolvetech-innovations.trackdrive.com/api/v1/leads', formData, function (response) {
+                const minimalResponse = {
+                    status: response.status,
+                    success: response.success,
+                };
+
+                // Store the formatted response in the hidden field
+                $("#trackdriveResponse").val(JSON.stringify(minimalResponse));
+                if (response.status === 200) {
+                    alert('Existing Lead Modified');
+                } else if (response.status === 201) {
+                    alert('New Lead Submitted');
+                } else {
+                    alert('Error: ' + JSON.stringify(response));
+                }
+                $('#leadForm').off('submit').submit();
+            }).fail(function () {
+                alert('Error submitting to TrackDrive API.');
+            });
             // Now you can submit the form
-            $("#leadForm").submit();
+            // $("#leadForm").submit();
         });
     });
 </script>
 
 <!-------Trim_Space---------------->
 <script>
-    function submitForm() {
-        let valid = true;
-        let check = $("input");
-        for(i=0; i<check.length; i++) {
-            if($(check[i]).val().length == 0){
-                valid = false;
-                break;
-            }
-        }
+    // function submitForm() {
+    //     let valid = true;
+    //     let check = $("input");
+    //     for(i=0; i<check.length; i++) {
+    //         if($(check[i]).val().length == 0){
+    //             valid = false;
+    //             break;
+    //         }
+    //     }
         
-        if(!valid){
-            alert('Enter all field ');
-            return;
-        }
+    //     if(!valid){
+    //         alert('Enter all field ');
+    //         return;
+    //     }
         
-        var data = $("form").serializeArray();
+    //     var data = $("form").serializeArray();
 		
-		const fieldsToExclude = ['ip_region', 'ip_city', 'ip_country']; // Add other fields you want to exclude
-		data = data.filter(function(field) {
-			return !fieldsToExclude.includes(field.name);
-		});
+	// 	const fieldsToExclude = ['ip_region', 'ip_city', 'ip_country']; // Add other fields you want to exclude
+	// 	data = data.filter(function(field) {
+	// 		return !fieldsToExclude.includes(field.name);
+	// 	});
 		
-		var serializedData = $.param(data);
+	// 	var serializedData = $.param(data);
         
-        $.post('https://advance-grow-marketing.trackdrive.com/api/v1/leads', data, function(rsp){
-            if (rsp.status = 200) {
-                let postDataToSheets = data;
-                postDataToSheets.push({ name: "api_response", value: JSON.stringify(rsp) });
+    //     $.post('https://advance-grow-marketing.trackdrive.com/api/v1/leads', data, function(rsp){
+    //         if (rsp.status = 200) {
+    //             let postDataToSheets = data;
+    //             postDataToSheets.push({ name: "api_response", value: JSON.stringify(rsp) });
 
-                $.post('https://script.google.com/macros/s/AKfycbxF-qYrIAEFGIPfoCfLPYU9p8_9-5CPlarkTogsd3JeWbdpdqKHsuEQYy8Y8oQkyMMD/exec', postDataToSheets, function(rsp) {
-                    if (rsp.result === "success") {
-                        alert('Form and API response posted successfully');
-                        window.location.href = '/thank-you.html';
-                    } else {
-                        alert('Error submitting to Google Sheets');
-                    }
-                }).fail(function(sheetError) {
-                    alert('Error: Unable to post to Google Sheets. ' + sheetError.responseText);
-                });
-                alert('Existing Lead Modified', JSON.stringify(rsp));
-                window.location.reload(true);
-            } else if (rsp.status = 422) {
-                let postDataToSheets = data;
-                postDataToSheets.push({ name: "api_response", value: JSON.stringify(rsp) });
+    //             $.post('https://script.google.com/macros/s/AKfycbxF-qYrIAEFGIPfoCfLPYU9p8_9-5CPlarkTogsd3JeWbdpdqKHsuEQYy8Y8oQkyMMD/exec', postDataToSheets, function(rsp) {
+    //                 if (rsp.result === "success") {
+    //                     alert('Form and API response posted successfully');
+    //                     window.location.href = '/thank-you.html';
+    //                 } else {
+    //                     alert('Error submitting to Google Sheets');
+    //                 }
+    //             }).fail(function(sheetError) {
+    //                 alert('Error: Unable to post to Google Sheets. ' + sheetError.responseText);
+    //             });
+    //             alert('Existing Lead Modified', JSON.stringify(rsp));
+    //             window.location.reload(true);
+    //         } else if (rsp.status = 422) {
+    //             let postDataToSheets = data;
+    //             postDataToSheets.push({ name: "api_response", value: JSON.stringify(rsp) });
 
-                $.post('https://script.google.com/macros/s/AKfycbxF-qYrIAEFGIPfoCfLPYU9p8_9-5CPlarkTogsd3JeWbdpdqKHsuEQYy8Y8oQkyMMD/exec', postDataToSheets, function(rsp) {
-                    if (rsp.result === "success") {
-                        alert('Form and API response posted successfully');
-                        window.location.href = '/thank-you.html';
-                    } else {
-                        alert('Error submitting to Google Sheets');
-                    }
-                }).fail(function(sheetError) {
-                    alert('Error: Unable to post to Google Sheets. ' + sheetError.responseText);
-                });
-                alert('DNC Error', JSON.stringify(rsp));
-                window.location.reload(true);
-            } else if (rsp.status = 201) {
-                let postDataToSheets = data;
-                postDataToSheets.push({ name: "api_response", value: JSON.stringify(rsp) });
+    //             $.post('https://script.google.com/macros/s/AKfycbxF-qYrIAEFGIPfoCfLPYU9p8_9-5CPlarkTogsd3JeWbdpdqKHsuEQYy8Y8oQkyMMD/exec', postDataToSheets, function(rsp) {
+    //                 if (rsp.result === "success") {
+    //                     alert('Form and API response posted successfully');
+    //                     window.location.href = '/thank-you.html';
+    //                 } else {
+    //                     alert('Error submitting to Google Sheets');
+    //                 }
+    //             }).fail(function(sheetError) {
+    //                 alert('Error: Unable to post to Google Sheets. ' + sheetError.responseText);
+    //             });
+    //             alert('DNC Error', JSON.stringify(rsp));
+    //             window.location.reload(true);
+    //         } else if (rsp.status = 201) {
+    //             let postDataToSheets = data;
+    //             postDataToSheets.push({ name: "api_response", value: JSON.stringify(rsp) });
 
-                $.post('https://script.google.com/macros/s/AKfycbxF-qYrIAEFGIPfoCfLPYU9p8_9-5CPlarkTogsd3JeWbdpdqKHsuEQYy8Y8oQkyMMD/exec', postDataToSheets, function(rsp) {
-                    if (rsp.result === "success") {
-                        alert('Form and API response posted successfully');
-                        window.location.href = '/thank-you.html';
-                    } else {
-                        alert('Error submitting to Google Sheets');
-                    }
-                }).fail(function(sheetError) {
-                    alert('Error: Unable to post to Google Sheets. ' + sheetError.responseText);
-                });
-                alert('New Lead Posted', JSON.stringify(rsp));
-                window.location.reload(true);
-            } else {
-                alert(JSON.stringify(rsp));
-            }
-        }).fail(function(response) {
-            alert('Error: ' + response.responseText);
-        });    
-    }
+    //             $.post('https://script.google.com/macros/s/AKfycbxF-qYrIAEFGIPfoCfLPYU9p8_9-5CPlarkTogsd3JeWbdpdqKHsuEQYy8Y8oQkyMMD/exec', postDataToSheets, function(rsp) {
+    //                 if (rsp.result === "success") {
+    //                     alert('Form and API response posted successfully');
+    //                     window.location.href = '/thank-you.html';
+    //                 } else {
+    //                     alert('Error submitting to Google Sheets');
+    //                 }
+    //             }).fail(function(sheetError) {
+    //                 alert('Error: Unable to post to Google Sheets. ' + sheetError.responseText);
+    //             });
+    //             alert('New Lead Posted', JSON.stringify(rsp));
+    //             window.location.reload(true);
+    //         } else {
+    //             alert(JSON.stringify(rsp));
+    //         }
+    //     }).fail(function(response) {
+    //         alert('Error: ' + response.responseText);
+    //     });    
+    // }
 
     // Add event listeners to trim spaces from input fields
     document.getElementById("firstName").addEventListener("input", function() {
