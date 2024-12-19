@@ -447,7 +447,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 }
                 $('#leadForm').off('submit').submit();
             }).fail(function () {
-                alert('Error submitting to TrackDrive API.');
+                alert('Error submitting to TrackDrive API.' + JSON.stringify(response));
             });
             // Now you can submit the form
             // $("#leadForm").submit();
