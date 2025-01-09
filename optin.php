@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'TrustedFormPingUrl' => htmlspecialchars($_POST['TrustedFormPingUrl']),
         'jornaya_leadid' => htmlspecialchars($_POST['jornaya_leadid']),
         'ip_address' => htmlspecialchars($_POST['ip_address']),
-        'traffic_source_id' => htmlspecialchars($_POST['9998']),
+        'traffic_source_id' => htmlspecialchars($_POST['traffic_source_id_g']),
         'ip_region' => htmlspecialchars($_POST['ip_region']),
         'ip_city' => htmlspecialchars($_POST['ip_city']),
         'ip_country' => htmlspecialchars($_POST['ip_country']),
@@ -281,6 +281,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				<input type='hidden' name='action' value='custom_form_submission'>
                 <input type='hidden' value='841cac55ba0f4312bf3f8a39f85edd69' name='lead_token'>
                 <input type='hidden' value='10201' name='traffic_source_id'>
+                <input type='hidden' value='9998' name='traffic_source_id_g'>
 				<input type='hidden' value='' name='source_url'>
 				<input type='hidden' id="ip-address" value='' name='ip_address'>
 				<input type='hidden' id="ip-region" value='' name='ip_region'>
@@ -431,7 +432,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         
         var data = $("form").serializeArray();
 		
-		const fieldsToExclude = ['ip_region', 'ip_city', 'ip_country']; // Add other fields you want to exclude
+		const fieldsToExclude = ['ip_region', 'ip_city', 'ip_country', 'traffic_source_id_g']; // Add other fields you want to exclude
 		data = data.filter(function(field) {
 			return !fieldsToExclude.includes(field.name);
 		});
