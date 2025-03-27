@@ -1,76 +1,5 @@
 <?php
 
-// Database connection
-// $host = 'localhost'; // Database host
-// $db = 'your_database'; // Database name
-// $user = 'your_username'; // Database username
-// $pass = 'your_password'; // Database password
-
-// try {
-//     $pdo = new PDO("mysql:host=$host;dbname=$db", $user, $pass);
-//     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-// } catch (PDOException $e) {
-//     die("Database connection failed: " . $e->getMessage());
-// }
-
-// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-//     // Form data processing
-//     $form_data = [
-//         'first_name' => htmlspecialchars($_POST['first_name']),
-//         'last_name' => htmlspecialchars($_POST['last_name']),
-//         'caller_id' => htmlspecialchars($_POST['caller_id']),
-//         'email' => filter_var($_POST['email'], FILTER_SANITIZE_EMAIL),
-//         'dob' => htmlspecialchars($_POST['dob']),
-//         'state' => htmlspecialchars($_POST['state']),
-//         'city' => htmlspecialchars($_POST['city']),
-//         'zip' => htmlspecialchars($_POST['zip']),
-//         'xxTrustedFormToken' => htmlspecialchars($_POST['xxTrustedFormToken']),
-//         'TrustedFormPingUrl' => htmlspecialchars($_POST['TrustedFormPingUrl']),
-//         'jornaya_leadid' => htmlspecialchars($_POST['jornaya_leadid']),
-//         'ip_address' => htmlspecialchars($_POST['ip_address']),
-//         'traffic_source_id' => htmlspecialchars($_POST['traffic_source_id']),
-//         'ip_region' => htmlspecialchars($_POST['ip_region']),
-//         'ip_city' => htmlspecialchars($_POST['ip_city']),
-//         'ip_country' => htmlspecialchars($_POST['ip_country']),
-//     ];
-
-//     // Insert data into the database
-//     try {
-//         $sql = "INSERT INTO custom_form_submissions 
-//                 (first_name, last_name, caller_id, email, dob, state, city, zip, xxTrustedFormToken, TrustedFormPingUrl, jornaya_leadid, ip_address, traffic_source_id, ip_region, ip_city, ip_country, time) 
-//                 VALUES 
-//                 (:first_name, :last_name, :caller_id, :email, :dob, :state, :city, :zip, :xxTrustedFormToken, :TrustedFormPingUrl, :jornaya_leadid, :ip_address, :traffic_source_id, :ip_region, :ip_city, :ip_country, NOW())";
-
-//         $stmt = $pdo->prepare($sql);
-//         $stmt->execute($form_data);
-//     } catch (PDOException $e) {
-//         error_log('Database insert failed: ' . $e->getMessage());
-//         die('Database insert failed');
-//     }
-
-//     // Send data to Google Sheets
-//     $url = 'https://script.google.com/macros/s/AKfycbxF-qYrIAEFGIPfoCfLPYU9p8_9-5CPlarkTogsd3JeWbdpdqKHsuEQYy8Y8oQkyMMD/exec';
-//     $postData = http_build_query($form_data);
-//     $options = [
-//         'http' => [
-//             'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
-//             'method'  => 'POST',
-//             'content' => $postData,
-//         ],
-//     ];
-//     $context = stream_context_create($options);
-//     $result = file_get_contents($url, false, $context);
-
-//     // Error handling for Google Sheets submission
-//     if ($result === FALSE) {
-//         error_log('Failed to submit data to Google Sheets');
-//     }
-
-//     // Redirect to a thank-you page or provide a response
-//     header("Location: /thank-you.html");
-//     exit();
-// }
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Process form data and sanitize inputs
     $form_data = [
@@ -124,6 +53,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <title>My Disability Assist - Get a Quote</title>
+
+    <script id="LeadiDscript" type="text/javascript">
+        (function() {
+        var s = document.createElement('script');
+        s.id = 'LeadiDscript_campaign';
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = '//create.lidstatic.com/campaign/11209397-31bc-376b-ac50-52df4acc79c5.js?snippet_version=2&f=reset';
+        var LeadiDscript = document.getElementById('LeadiDscript');
+        LeadiDscript.parentNode.insertBefore(s, LeadiDscript);
+        })();
+        </script>
+        <noscript><img src='//create.leadid.com/noscript.gif?lac=CF4996BF-EAEF-6727-187B-F7D19ACD91A7&lck=11209397-31bc-376b-ac50-52df4acc79c5&snippet_version=2' /></noscript>
+        <!-- For Jornaya -->
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
@@ -470,20 +413,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <p>Submitting, please wait...</p>
         </div>
     </div>
-
-    <script id="LeadiDscript" type="text/javascript">
-        (function() {
-        var s = document.createElement('script');
-        s.id = 'LeadiDscript_campaign';
-        s.type = 'text/javascript';
-        s.async = true;
-        s.src = '//create.lidstatic.com/campaign/11209397-31bc-376b-ac50-52df4acc79c5.js?snippet_version=2&f=reset';
-        var LeadiDscript = document.getElementById('LeadiDscript');
-        LeadiDscript.parentNode.insertBefore(s, LeadiDscript);
-        })();
-        </script>
-        <noscript><img src='//create.leadid.com/noscript.gif?lac=CF4996BF-EAEF-6727-187B-F7D19ACD91A7&lck=11209397-31bc-376b-ac50-52df4acc79c5&snippet_version=2' /></noscript>
-        <!-- For Jornaya -->
         
         <!-- TrustedForm -->
         <script type="text/javascript">

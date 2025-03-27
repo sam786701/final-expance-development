@@ -57,6 +57,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="icon" href="https://securelastexpense.com/wp-content/uploads/2024/10/Group-3693-300x300.png" sizes="192x192" />
     <link rel="apple-touch-icon" href="https://securelastexpense.com/wp-content/uploads/2024/10/Group-3693-300x300.png" />
 
+    <script id="LeadiDscript" type="text/javascript">
+        (function() {
+        var s = document.createElement('script');
+        s.id = 'LeadiDscript_campaign';
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = '//create.lidstatic.com/campaign/11209397-31bc-376b-ac50-52df4acc79c5.js?snippet_version=2&f=reset';
+        var LeadiDscript = document.getElementById('LeadiDscript');
+        LeadiDscript.parentNode.insertBefore(s, LeadiDscript);
+        })();
+        </script>
+        <noscript><img src='//create.leadid.com/noscript.gif?lac=CF4996BF-EAEF-6727-187B-F7D19ACD91A7&lck=11209397-31bc-376b-ac50-52df4acc79c5&snippet_version=2' /></noscript>
+        <!-- For Jornaya -->
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
@@ -340,20 +354,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
         </form>
     </div>
-
-    <script id="LeadiDscript" type="text/javascript">
-        (function() {
-        var s = document.createElement('script');
-        s.id = 'LeadiDscript_campaign';
-        s.type = 'text/javascript';
-        s.async = true;
-        s.src = '//create.lidstatic.com/campaign/11209397-31bc-376b-ac50-52df4acc79c5.js?snippet_version=2&f=reset';
-        var LeadiDscript = document.getElementById('LeadiDscript');
-        LeadiDscript.parentNode.insertBefore(s, LeadiDscript);
-        })();
-        </script>
-        <noscript><img src='//create.leadid.com/noscript.gif?lac=CF4996BF-EAEF-6727-187B-F7D19ACD91A7&lck=11209397-31bc-376b-ac50-52df4acc79c5&snippet_version=2' /></noscript>
-        <!-- For Jornaya -->
         
         <!-- TrustedForm -->
         <script type="text/javascript">
