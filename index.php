@@ -292,7 +292,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <form id="leadForm" action='' method='post'>
             <h1>Get Consultation Now!</h1>
             <div class="form-content">
-				<input type='hidden' name='action' value='custom_form_submission'>
                 <input type='hidden' value='841cac55ba0f4312bf3f8a39f85edd69' name='lead_token'>
                 <input type='hidden' value='10201' name='traffic_source_id'>
 				<input type='hidden' value='' name='source_url'>
@@ -300,7 +299,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				<input type='hidden' id="ip-region" value='' name='ip_region'>
 				<input type='hidden' id="ip-city" value='' name='ip_city'>
 				<input type='hidden' id="ip-country" value='' name='ip_country'>
-				<input type='hidden' id='timestamp' name='optin_timestamp' value=''>
+				<input type='hidden' id='timestamp' name='original_lead_submit_date' value=''>
 
                 <div class="FNAME">
 					<label for="firstName">First Name: <span style="color: red;">*</span></label>
@@ -409,6 +408,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             // Now you can submit the form
             $("#leadForm").submit();
         });
+    });
+
+    // Run the function on page load
+    $(document).ready(function() {
+        waitForJornayaLeadID();
     });
 </script>
 
