@@ -455,6 +455,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         });    
     }
 
+    function waitForJornayaLeadID(attempts = 10) {
+        let leadId = $('#leadid_token').val();
+        
+        if (leadId) {
+            console.log("Jornaya Lead ID found:", leadId);
+            $('#providerid_token').val(leadId);
+        } else if (attempts > 0) {
+            console.warn("Jornaya Lead ID not available yet. Retrying...");
+            setTimeout(() => waitForJornayaLeadID(attempts - 1), 1000); // Retry every second
+        } else {
+            console.error("Jornaya Lead ID could not be retrieved.");
+        }
+    }
+
     // Add event listeners to trim spaces from input fields
     document.getElementById("firstName").addEventListener("input", function() {
         this.value = this.value.trim();
