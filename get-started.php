@@ -191,7 +191,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		.form-content .FNAME, .form-content .LNAME, .form-content .PHONE, .form-content .EMAIL {
 			width: 48%;
 		}
-		.form-content .DOB, .from-content .GENDER {
+		.form-content .DOB, .form-content .GENDER {
 			width: 100%;
 		}
 		.form-content .STATE, .form-content .CITY, .form-content .ZIP {
