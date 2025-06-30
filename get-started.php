@@ -115,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 			font-weight: 500;
         }
 
-        input {
+        input, select {
             width: 100%;
             padding: 15px;
             margin-bottom: 16px;
