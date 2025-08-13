@@ -508,7 +508,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         this.value = this.value.trim();
     });
 
-    document.getElementById("address").addEventListener("input", function() {
+    document.getElementById("phoneNumber").addEventListener("input", function() {
         this.value = this.value.trim();
     });
 </script>
