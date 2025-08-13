@@ -8,6 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'caller_id' => htmlspecialchars($_POST['caller_id']),
         'email' => filter_var($_POST['email'], FILTER_SANITIZE_EMAIL),
         'dob' => htmlspecialchars($_POST['dob']),
+        'address' => htmlspecialchars($_POST['address']),
         'state' => htmlspecialchars($_POST['state']),
         'city' => htmlspecialchars($_POST['city']),
         'zip' => htmlspecialchars($_POST['zip']),
@@ -335,7 +336,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				</div>
 
                 <div class="ADDRESS">
-					<label for="address">State: <span style="color: red;">*</span></label>
+					<label for="address">Address: <span style="color: red;">*</span></label>
                 	<input type="text" placeholder="Address" id="address" name="address" required>
 				</div>
 
@@ -504,6 +505,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     });
 
     document.getElementById("zip").addEventListener("input", function() {
+        this.value = this.value.trim();
+    });
+
+    document.getElementById("address").addEventListener("input", function() {
         this.value = this.value.trim();
     });
 </script>
